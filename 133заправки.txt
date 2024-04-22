@@ -1,0 +1,48 @@
+import math
+from cmath import sqrt
+with open("INPUT.txt", "r") as fin:
+   with open ('OUTPUT.txt', 'w') as fr: 
+    line = fin.readline().split()
+    n = int(line[0])
+    line = fin.readline().split()
+    a = []
+    comp = 0
+    for i in range(n):
+        a.append(int(line[i]))
+    b = []
+    for i in range(n):
+        c = []
+        for j in range(n):
+            c.append(10 ** 9)
+        b.append(c)
+    
+    line = fin.readline().split()
+    m = int(line[0])
+    
+    for i in range(m):
+        line = fin.readline().split()
+        b[int(line[0]) - 1][int(line[1]) - 1] = a[int(line[0]) - 1]
+        b[int(line[1]) - 1][int(line[0]) - 1] = a[int(line[1]) - 1]
+    
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if b[i][k] < 10 ** 9 and b[k][j] < 10 ** 9:
+                    b[i][j] = min(b[i][j], b[i][k] + b[k][j])
+    for i in range(n):
+        for j in range(n):
+            if b[i][j] > comp and b[i][j] != 10 ** 9:
+                comp = b[i][j]
+ 
+    
+    for i in range(len(b)):
+        for j in range(len(b[i])):
+            if i == j:
+                b[i][j] = 0
+   
+        
+    ans = b[0][n - 1]
+    if ans == 1000000000:
+        ans = -1
+    
+    fr.write(str(ans) + "\n")

@@ -1,0 +1,73 @@
+import math
+from cmath import sqrt
+with open("INPUT.txt", "r") as fin:
+   with open ('OUTPUT.txt', 'w') as fr: 
+    line = fin.readline().split()
+    n,s,f = int(line[0]), int(line[1]), int(line[2])
+    summ = 0
+ 
+    a = []
+    visited = []
+    pathchoose = []
+    for i in range(n):
+        line = fin.readline().split()
+        b = []
+        for j in range(n):
+            b.append(int(line[j]))
+            if b[-1] == -1:
+                b[-1] = pow(10, 9)
+        a.append(b)
+        
+ 
+    for i in range(n):
+        pathchoose.append(pow(10, 9))
+ 
+    for i in range(n):
+        visited.append(0)
+ 
+    pathchoose[s-1] = 0
+ 
+    for t in range(n):
+ 
+        qwe = pow(10, 9)
+        k = 0
+ 
+        for i in range(n):
+            if pathchoose[i] < qwe and visited[i] < 1:
+                qwe = pathchoose[i]
+                k = i
+ 
+        if pathchoose[k] == pow(10, 9):
+            break
+ 
+        print(k)
+        visited[k] = 1
+ 
+        for j in range(n):
+            if a[k][j] + pathchoose[k] < pathchoose[j]:
+                pathchoose[j] = a[k][j] + pathchoose[k]
+ 
+    
+ 
+    if pathchoose[f - 1] == 10 ** 9:
+        pathchoose[f - 1] = -1
+ 
+ 
+   
+ 
+ 
+ 
+    fr.write(str(pathchoose[f - 1]) + "\n")
+ 
+    for i in range(n):
+        if pathchoose[i] == 0:
+            pathchoose[i] = -1
+            pathchoose[0] = 0
+    print(pathchoose)
+ 
+    ans = pathchoose[f-1]
+    
+ 
+    fr.write(str(ans) + "\n")
+
+    

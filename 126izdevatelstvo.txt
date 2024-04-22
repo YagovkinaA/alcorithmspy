@@ -1,0 +1,14 @@
+with open("INPUT.txt", "r") as fin:
+    lines = fin.readline()
+    n=int(lines)
+    data = [next(fin).split() for _ in range(n)]
+    sum=3001    
+    for i in range(n):
+        for j in range(i+1, n):
+            for k in range(j+1, n):
+                a=int(data[i][j])
+                b=int(data[j][k])
+                c=int(data[k][i])
+                sum = min(sum, a+b+c)
+with open ('OUTPUT.txt', 'w') as f:
+    f.write(str(sum))

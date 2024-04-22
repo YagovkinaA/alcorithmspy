@@ -1,0 +1,15 @@
+with open("INPUT.txt", "r") as fin:
+    lines = fin.readline().split()
+    n=int(lines[0])
+    m=int(lines[1])
+    lines.pop()
+    pere=[0]*n
+    data = [next(fin).split() for _ in range(m)]
+    for i in range(m):
+        a=int(data[i][0])
+        b=int(data[i][1])
+        pere[a-1]+=1
+        pere[b-1]+=1
+   
+    with open ('OUTPUT.txt', 'w') as f:
+     f.write(' '.join(str(i) for i in pere))     

@@ -1,0 +1,28 @@
+with open("INPUT.txt", "r") as fin:
+   with open ('OUTPUT.txt', 'w') as f: 
+
+        line = fin.readline().split()
+        n = int(line[0])
+
+        w = []
+
+        for i in range(n):
+         a = []
+         line = fin.readline().split()
+         for j in range(n):
+            a.append(int(line[j]))
+         w.append(a)
+         
+
+        for k in range(0, n):
+         for i in range(0, n):
+            for j in range(0, n):
+                if w[i][k] < 10 ** 9 and w[k][j] < 10 ** 9:
+                    w[i][j] = min(w[i][j], w[i][k] + w[k][j])
+
+
+
+   
+
+        for i in range(n):
+         f.write(str(' '.join([str(x) for x in w[i]])) + "\n")

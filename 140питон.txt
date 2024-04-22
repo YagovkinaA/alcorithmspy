@@ -1,0 +1,35 @@
+with open("INPUT.txt", "r") as fin:
+   with open ('OUTPUT.txt', 'w') as fr: 
+    
+    line = fin.readline().split()
+    n = int(line[0])
+    INF = 1e18
+    a = []
+    w = []
+    ans = "NO"
+    for i in range(n):
+        line = fin.readline().split()
+        b = []
+  
+        for j in range(n):
+            b.append(int(line[j]))
+            if b[-1] == 100000:
+                b[-1] = INF
+            if i == j and int(line[j]) < 0:
+                ans = "YES"
+  
+        a.append(b)
+  
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if a[i][k] != INF and a[k][j] != INF:
+                    a[i][j] = min(a[i][j], a[i][k] + a[k][j])
+    
+  
+    for i in range(n):
+        if a[i][i] < 0:
+            ans = "YES"
+    
+  
+    fr.write(str(ans) + "\n")

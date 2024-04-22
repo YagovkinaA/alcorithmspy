@@ -1,0 +1,48 @@
+def dfs(graph, start, visited=None):
+    friends=1
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    
+    for next in graph[start] - visited:
+        friends+=1
+        dfs(graph, next, visited)
+    return friends
+def convert_nested_to_int(lst):
+    result = []
+    for item in lst:
+        if isinstance(item, list):
+            result.append(convert_nested_to_int(item))
+        else:
+            result.append(int(item))
+    return result
+with open("INPUT.txt", "r") as fin:
+    with open ('OUTPUT.txt', 'w') as f:
+     lines = fin.readline().split()
+     n=int(lines[0])
+     s=int(lines[1])
+     lines.pop()
+     inserttable = [next(fin).split() for _ in range(n)]
+     data1=inserttable.copy()
+     
+     data=convert_nested_to_int(data1)
+     graph={}
+          
+     humans= list(range(0,n))
+     for i in range(n):
+      for j in range(n):
+        if data[i][j]==0:
+            data[i][j]=-1
+        elif data[i][j]==1:
+            data[i][j]=j
+          
+     for i in range(0,n):
+      key=humans[i]
+      neaw=[i for i in data[i] if i !=-1]
+      value=set(neaw.copy())
+      graph[key]=value
+     otvet=str((dfs(graph,0)))
+     f.write(otvet)
+    
+
+

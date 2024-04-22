@@ -1,0 +1,23 @@
+# with open("INPUT2.txt", "r") as fin:
+with open("INPUT.txt", "r") as fin:
+    with open ('OUTPUT.txt', 'w') as f:
+     lines = fin.readline()
+     n=int(lines)
+     data = [next(fin).split() for _ in range(n)]
+     
+     vershini=n
+     rebra=int(0)
+     for i in range(n):
+        for j in range(n):
+           fr=int(data[i][j])
+           rebra+=fr
+     
+     f1=str(n)
+     f2=str(rebra)
+     f.write(f"{f1} {f2}\n")
+     for i in range(n):
+        for j in range(n):
+           curr=int(data[i][j])
+           if curr==1:
+              f.write(f"{i+1} {j+1}\n")
+              

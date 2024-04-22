@@ -1,0 +1,89 @@
+from collections import defaultdict
+from operator import itemgetter
+class Graph():
+
+	def __init__(self, V):
+		self.V = V
+		self.graph = defaultdict(list)
+
+	def addEdge(self, v, w):
+		
+		self.graph[v].append(w) 
+		
+		self.graph[w].append(v) 
+
+	
+	def isCyclicUtil(self, v, visited, parent):
+
+		
+		visited[v] = True
+
+		
+		for i in self.graph[v]:
+			
+			if visited[i] == False:
+				if self.isCyclicUtil(i, visited, v) == True:
+					return True
+
+			
+			elif i != parent:
+				return True
+
+		return False
+
+	
+	def isTree(self):
+		
+		visited = [False] * self.V
+
+		
+		if self.isCyclicUtil(0, visited, -1) == True:
+			return False
+
+		
+		for i in range(self.V):
+			if visited[i] == False:
+				return False
+
+		return True
+def convert_nested_to_int(lst):
+    result = []
+    for item in lst:
+        if isinstance(item, list):
+            result.append(convert_nested_to_int(item))
+        else:
+            result.append(int(item))
+    return result
+with open ('OUTPUT.txt', 'w') as f:
+ with open("INPUT.txt", "r") as fin:
+  
+     lines = fin.readline()
+     
+     n=int(lines)
+   
+     inserttable = [next(fin).split() for _ in range(n)]
+     data1=inserttable.copy()
+	 
+	  
+     g1=Graph(n)
+     data=convert_nested_to_int(data1)
+     graph1={}
+     humans= list(range(0,n))    
+     
+     for i in range(n):
+      for j in range(n):
+        if data[i][j]==0:
+            data[i][j]=-1
+        elif data[i][j]==1:
+            data[i][j]=j
+     for i in range(n):
+      for j in range(n):
+       edg1=i
+       if data[i][j]!=-1:
+        edg2=data[i][j]
+        g1.addEdge(edg1, edg2)
+     
+     if g1.isTree()!=True:
+         f.write('YES')
+     elif g1.isTree()==True:
+         f.write('NO') 

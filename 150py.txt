@@ -1,0 +1,29 @@
+def invert(c):
+    return 2 if c == 1 else 1
+
+def dfs(v, c, g, cl):
+    cl[v] = c
+    for to in g[v]:
+        if cl[to] == 0:
+            dfs(to, invert(c), g, cl)
+        elif cl[to] == c:
+            f.write("NO")
+            exit(0)
+
+with open("input.txt", "r") as f:
+   n, m = map(int, f.readline().split())
+   g = [[] for i in range(n)]
+   cl = [0] * n
+   for i in range(m):
+     a, b = map(int, f.readline().split())
+     g[a - 1].append(b - 1)
+     g[b - 1].append(a - 1)
+
+   for i in range(n):
+        if cl[i] == 0:
+            dfs(i, 1, g, cl)
+
+   with open("output.txt", "w") as fr:
+        fr.write("YES")
+
+

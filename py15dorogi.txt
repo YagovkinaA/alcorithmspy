@@ -1,0 +1,8 @@
+
+with open("INPUT.txt", "r") as fin:
+    s = int(fin.readline())
+    a = [[int(num) for num in line.split()] for line in fin]
+    k = sum(sum(row) for row in a)
+
+with open("OUTPUT.txt", "w") as out:
+    out.write(f"{k//2}\n")

@@ -1,0 +1,28 @@
+def checkotv(otvet):
+ 
+    ele = otvet[0]
+    chk = True
+ 
+    
+    for item in otvet:
+        if ele != item:
+            chk = False
+            break
+ 
+    if (chk == True):
+        f.write('YES')
+    else:
+        f.write('NO')
+# with open("INPUT2.txt", "r") as fin:
+with open("INPUT.txt", "r") as fin:
+   with open ('OUTPUT.txt', 'w') as f:
+    lines = fin.readline()
+    n=int(lines)
+    data = [next(fin).split() for _ in range(n)]
+    otvet=[0]*n
+    for i in range(n):
+        for j in range(n):
+           curr=int(data[i][j])
+           if curr==1:
+              otvet[i]+=curr
+    checkotv(otvet)
